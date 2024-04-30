@@ -9,8 +9,8 @@ const StatisticLine = ({ text, value }) => (
 );
 const Statistic = ({ good, neutral, bad }) => {
   const all = good + neutral + bad;
-  const average = (good - bad) / all;
-  const positive = good / all;
+  const average = ((good - bad) / all).toFixed(1) || 0;
+  const positive = ((good / all) * 100).toFixed(1) || 0;
   return (
     <>
       <h1>statistics</h1>
