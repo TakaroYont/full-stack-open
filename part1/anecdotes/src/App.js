@@ -17,13 +17,18 @@ const App = () => {
   const setRandom = () => () => setSelected(Math.floor(Math.random() * anecdotes.length));
   const [votes, setVotes] = useState({});
   const addVote = (id) => () => setVotes({ ...votes, [id]: votes[id] + 1 || 1 });
+  const mostVoted = () => Object.keys(votes).sort((a, b) => votes[b] - votes[a])[0] ?? 0;
 
   return (
     <>
+      <h1>Anecdote of the day</h1>
       <div>{anecdotes[selected]}</div>
       <div>has {votes[selected] ?? 0} votes</div>
       <Button text='vote' handleClick={addVote(selected)} />
       <Button text='next anecdote' handleClick={setRandom()} />
+      <h1>Anecdote with most votes</h1>
+      <div>{anecdotes[mostVoted()]}</div>
+      <div>has {votes[mostVoted()] ?? 0} votes</div>
     </>
   );
 };
